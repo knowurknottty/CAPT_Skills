@@ -137,3 +137,26 @@ def test_write_discovery_links_emits_jsonl(tmp_path: Path):
     row = json.loads(output.read_text().strip())
     assert row["name"] == "alpha"
     assert row["target_exists"] is True
+
+
+def test_inventory_reads_chomped_folded_description_frontmatter(tmp_path: Path):
+    root = tmp_path / "root"
+    make_skill(
+        root,
+        "folded-chomped",
+        "---\nname: folded-chomped\ndescription: >-\n  Use when folded YAML uses\n  a chomping indicator\n---\n",
+    )
+
+    record = iter_skill_records({"live": root})[0]
+    assert record.description == "Use when folded YAML uses a chomping indicator"
+
+
+def test_portable_path_collapses_home_prefix_without_touching_external_paths():
+    from goat_forge.inventory import portable_path
+
+    home = Path("/Users/example")
+    inside = Path("/Users/example/.hermes/skills/alpha")
+    outside = Path("/opt/shared/skill")
+
+    assert portable_path(inside, home=home) == "~/.hermes/skills/alpha"
+    assert portable_path(outside, home=home) == "/opt/shared/skill"

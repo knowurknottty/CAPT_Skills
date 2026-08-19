@@ -38,39 +38,26 @@ Search the authorized local filesystem for the requested `CAPT_skills` / `CAPT_S
 
 The four existing Inversion Labs craft skills are incumbents, not raw candidates. They remain protected from accidental replacement and are evaluated as part of collision detection and composition analysis.
 
-## Repository layout
+## Storage layout
+
+Raw imported bytes are **local quarantine material, never repository content**. This invariant was added after GitHub push protection correctly detected credential-bearing historical reference files in one CAPT package during the first staging attempt.
 
 ```text
+~/.capt-skill-forge/quarantine/
+  hermes/<skill>/original/        # immutable local snapshot
+  capt/<skill>/original/          # immutable local snapshot
+  forge/<skill>/                  # local pre-promotion working material
+
 CAPT_Skills/
-  skills/                         # promoted canonical skills only
-  staging/
-    hermes/
-      <skill>/
-        original/                 # immutable imported snapshot
-        candidate/                # forge working copy
-    capt/
-      <skill>/
-        original/
-        candidate/
-    rejected/                     # intentionally non-promoted candidates
-  provenance/
-    manifest.jsonl                # append-only import/promotion records
-    collisions.json               # duplicate/overlapping authority analysis
-  evals/
-    <skill>/
-      cases.yaml                  # positive, negative, adversarial cases
-      baseline/                   # original outputs/results
-      candidate/                  # forged outputs/results
-      verdict.md                  # evidence-bearing promotion verdict
-  scripts/
-    inventory_skills.py
-    validate_skill.py
-    score_skill.py
-    detect_collisions.py
-    promote_skill.py
+  skills/                         # promoted, verified, secret-scanned skills only
+  provenance/                     # portable metadata/digests; no secret values
+  evals/                          # safe behavioral evidence and verdicts
+  scripts/                        # inventory, scoring, forge, promotion tooling
 ```
 
-Generated names may be adjusted after filesystem inspection if an incumbent repository convention is stronger, but the separation between canonical skills, staging, provenance, evaluations, and promotion tooling is invariant.
+Committed provenance uses portable source locators such as `~/.hermes/skills/...` rather than literal machine-specific absolute home paths. Secret-like values are never copied into provenance, logs, eval reports, or commit messages.
+
+The separation between canonical promoted skills, local quarantine, provenance, evaluations, and promotion tooling is invariant. No command may stage raw quarantine bytes into Git.
 
 ## Import invariants
 
@@ -80,7 +67,7 @@ Required record fields:
 
 - stable import ID
 - source type: `hermes` or `capt`
-- absolute source path
+- portable source locator (home-relative when possible)
 - source package name
 - discovery timestamp
 - source file inventory
@@ -92,13 +79,13 @@ Required record fields:
 - duplicate/collision candidates
 - import status
 
-`original/` is immutable after import. All transformations occur in `candidate/`.
+`original/` is immutable after import and remains outside Git. All transformations occur in a quarantine forge workspace until a candidate clears promotion gates.
 
 A later rediscovery of the same package digest must be idempotent and must not silently overwrite provenance.
 
 ## GOAT candidate ranking
 
-Hermes skills are scored before staging as forge candidates. CAPT skills are all staged, then scored.
+Hermes skills are scored before local quarantine as forge candidates. CAPT skills are all quarantined locally, then scored. Neither raw lane is committed.
 
 Ranking dimensions:
 

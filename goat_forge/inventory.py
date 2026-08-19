@@ -25,6 +25,15 @@ class SkillRecord:
         return asdict(self)
 
 
+def portable_path(path: Path, *, home: Path | None = None) -> str:
+    home = home or Path.home()
+    try:
+        relative = path.relative_to(home)
+    except ValueError:
+        return str(path)
+    return "~/" + relative.as_posix()
+
+
 @dataclass(frozen=True)
 class DiscoveryLink:
     name: str
@@ -77,7 +86,7 @@ def _frontmatter(text: str, fallback_name: str) -> tuple[str, str, str]:
     description = ""
     if desc_match:
         raw = desc_match.group(1).strip()
-        if raw in {">", "|"}:
+        if raw in {">", "|", ">-", "|-", ">+", "|+"}:
             tail = header[desc_match.end():].lstrip("\r\n").splitlines()
             folded = []
             for line in tail:
@@ -117,7 +126,7 @@ def iter_skill_records(source_roots: dict[str, Path]) -> list[SkillRecord]:
             records.append(
                 SkillRecord(
                     source_lane=lane,
-                    source_path=str(skill_root.resolve(strict=False)),
+                    source_path=portable_path(skill_root.resolve(strict=False)),
                     relative_path=relative,
                     name=name,
                     description=description,
@@ -132,16 +141,26 @@ def iter_skill_records(source_roots: dict[str, Path]) -> list[SkillRecord]:
     return records
 
 
-def write_inventory(records: list[SkillRecord], jsonl_path: Path, summary_path: Path) -> None:
+def write_inventory(
+    records: list[SkillRecord],
+    jsonl_path: Path,
+    summary_path: Path,
+    source_roots: dict[str, Path] | None = None,
+) -> None:
     jsonl_path.parent.mkdir(parents=True, exist_ok=True)
     summary_path.parent.mkdir(parents=True, exist_ok=True)
     lines = [json.dumps(record.to_dict(), sort_keys=True) for record in records]
     jsonl_path.write_text("\n".join(lines) + ("\n" if lines else ""))
-    summary = {
+    counts = Counter(r.source_lane for r in records)
+    by_lane = dict(sorted(counts.items()))
+    summary: dict[str, object] = {
         "total": len(records),
-        "by_lane": dict(sorted(Counter(r.source_lane for r in records).items())),
+        "by_lane": by_lane,
         "frontmatter": dict(sorted(Counter(r.frontmatter_status for r in records).items())),
     }
+    if source_roots is not None:
+        summary["by_lane"] = {lane: counts.get(lane, 0) for lane in sorted(source_roots)}
+        summary["scanned_roots"] = {lane: str(path) for lane, path in sorted(source_roots.items())}
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
 
 
@@ -163,7 +182,7 @@ def iter_discovery_links(root: Path) -> list[DiscoveryLink]:
             continue
         raw_target = path.readlink()
         target = (path.parent / raw_target).resolve(strict=False)
-        links.append(DiscoveryLink(path.name, str(path), str(target), target.exists()))
+        links.append(DiscoveryLink(path.name, portable_path(path), portable_path(target), target.exists()))
     return links
 
 

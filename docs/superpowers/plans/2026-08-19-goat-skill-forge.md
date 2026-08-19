@@ -4,7 +4,7 @@
 
 **Goal:** Build a provenance-preserving pipeline that inventories Hermes skills, stages CAPT skills separately, ranks GOAT candidates, forges stronger variants one-by-one, and promotes only verified winners into the canonical CAPT_Skills library.
 
-**Architecture:** `CAPT_Skills` stays canonical. Raw source skills are copied into non-discoverable staging with hashes and provenance; deterministic tooling produces inventory and score artifacts; each candidate gets an isolated forge workspace and behavioral eval; only promoted skills enter `skills/` and the existing symlink installer. The dirty primary checkout must never be modified; execution happens in an isolated git worktree.
+**Architecture:** `CAPT_Skills` stays canonical for safe metadata, evals, tooling, and promoted skills. Raw source bytes are copied into `~/.capt-skill-forge/quarantine/` outside Git; deterministic tooling records portable digests/provenance, and only verified + secret-scanned promoted skills enter `skills/`. The dirty primary checkout must never be modified; execution happens in an isolated git worktree.
 
 **Tech Stack:** Python 3.12+, stdlib (`pathlib`, `hashlib`, `json`, `shutil`, `re`, `subprocess`), pytest, zsh, git.
 
@@ -15,7 +15,8 @@
 - Local filesystem via RDC is authoritative for source discovery.
 - GitHub is authoritative for committed forge state.
 - Preserve every staged original byte-for-byte and record SHA-256 provenance before transformation.
-- Raw staged skills must never be linked into live discovery roots.
+- Raw quarantined skills must never be committed, pushed, or linked into live discovery roots.
+- Committed provenance must not contain secret values or literal home-directory absolute paths.
 - Existing canonical Inversion craft skills are incumbents and cannot be silently overwritten.
 - A skill is promoted only after structural, trigger, adversarial, and baseline-vs-forged verification passes.
 - Optimize capability density and trigger precision; do not reward verbosity.
@@ -33,7 +34,7 @@
 **Interfaces:**
 - Produces: `ForgePaths(repo_root: Path, hermes_live: Path, hermes_bundled: Path, hermes_optional: Path)` and `validate_source_roots(paths) -> None`.
 
-- [ ] Write failing tests proving the canonical repo root, staging roots, and three Hermes source roots resolve independently and that missing roots fail closed.
+- [ ] Write failing tests proving the canonical repo root, local quarantine root, and three Hermes source roots resolve independently and that missing source roots fail closed.
 - [ ] Run `pytest tests/test_goat_forge_paths.py -v` and confirm RED.
 - [ ] Implement `ForgePaths` and strict existence/type validation with no implicit source creation.
 - [ ] Run the test and confirm GREEN.
@@ -58,23 +59,23 @@
 - [ ] Run the inventory against `~/.hermes/skills`, `~/.hermes/hermes-agent/skills`, and `~/.hermes/hermes-agent/optional-skills`; save JSONL plus a summary report.
 - [ ] Commit `feat: add provenance-preserving Hermes skill inventory`.
 
-### Task 3: CAPT Staging + Hermes GOAT Candidate Staging
+### Task 3: CAPT Quarantine + Hermes GOAT Candidate Quarantine
 
 **Files:**
 - Create: `goat_forge/staging.py`
 - Create: `scripts/goat_forge_stage.py`
 - Test: `tests/test_goat_forge_staging.py`
-- Create directories: `staging/capt/`, `staging/hermes/`, `staging/forge/`
+- Create local-only directories: `~/.capt-skill-forge/quarantine/capt/`, `hermes/`, `forge/`
 
 **Interfaces:**
 - Produces: `stage_skill(record, lane, destination_root) -> StagedSkill` and immutable `SOURCE.json` beside each staged package.
 
-- [ ] Write failing tests proving byte-for-byte copy, hash equality, collision-safe source naming, refusal to overwrite an existing immutable original, and no staging path under `skills/`.
-- [ ] Run staging tests and confirm RED.
-- [ ] Implement staging with copy-to-temp + digest verification + atomic rename.
-- [ ] Identify CAPT-specific skills by package path/name plus CAPT metadata, manually review ambiguous matches, then stage all accepted CAPT packages into `staging/capt`.
-- [ ] Stage only ranked Hermes GOAT candidates into `staging/hermes`; do not stage the entire 385-skill live tree blindly.
-- [ ] Run tests and digest reconciliation, then commit `feat: add immutable GOAT skill staging lanes`.
+- [ ] Write failing tests proving byte-for-byte copy, hash equality, collision-safe source naming, refusal to overwrite an existing immutable original, and quarantine is outside the repository/live `skills/` tree.
+- [ ] Run quarantine tests and confirm RED.
+- [ ] Implement local quarantine with copy-to-temp + digest verification + atomic rename.
+- [ ] Identify CAPT-specific skills by package path/name plus CAPT metadata, manually review ambiguous matches, then quarantine all accepted CAPT packages locally.
+- [ ] Quarantine only ranked Hermes GOAT candidates; do not copy the entire live tree blindly.
+- [ ] Run tests and digest reconciliation; commit tooling/provenance only, never raw quarantine bytes.
 
 ### Task 4: GOAT Ranking Engine
 
@@ -99,7 +100,7 @@
 **Files:**
 - Create: `goat_forge/forge_contract.py`
 - Create: `tests/test_goat_forge_contract.py`
-- Create per candidate: `staging/forge/<skill>/BASELINE.md`, `FORGED/SKILL.md`, `CHANGELOG.md`, `EVAL.md`
+- Create per candidate locally: `~/.capt-skill-forge/quarantine/forge/<skill>/BASELINE.md`, `FORGED/SKILL.md`, `CHANGELOG.md`, `EVAL.md`; commit only safe eval/verdict artifacts.
 
 **Interfaces:**
 - Produces: `ForgeReview` covering semantic name contract, positive and negative triggers, authority boundaries, prerequisites, workflow, decision gates, failure taxonomy, recovery, evidence requirements, stopping conditions, composition rules, context efficiency, and unresolved blockers.
@@ -123,7 +124,7 @@
 **Interfaces:**
 - Produces: `PromotionDecision(PASS|FIX|NO_GO|BLOCKED)` with evidence paths; promotion copies only the verified forged package into `skills/<name>`.
 
-- [ ] Write failing tests proving raw staged packages cannot be promoted, incumbent name collisions require explicit replacement evidence, and failed evals block installer exposure.
+- [ ] Write failing tests proving raw quarantined packages cannot be promoted directly, secret scan failures block promotion, incumbent name collisions require explicit replacement evidence, and failed evals block installer exposure.
 - [ ] Add positive-trigger, should-not-trigger, ambiguous-input, tool-failure, hallucination-trap, premature-success, conflicting-instruction, and baseline-vs-forged cases per skill.
 - [ ] Require structural PASS + behavioral PASS + no unresolved material red-team finding before promotion.
 - [ ] Promote candidates one-by-one and add only promoted names to installer exposure.
@@ -140,7 +141,7 @@
 - Produces a final table of source path, source digest, disposition, forged digest, eval evidence, promotion state, and live discovery targets.
 
 - [ ] Re-hash every promoted source and forged package and reconcile against provenance records.
-- [ ] Verify no raw `staging/` path is symlinked from `~/.agents/skills`, `~/.claude/skills`, or `~/.hermes/skills`.
+- [ ] Verify no raw quarantine path is Git-tracked or symlinked from `~/.agents/skills`, `~/.claude/skills`, or `~/.hermes/skills`.
 - [ ] Verify promoted symlinks resolve exactly to canonical `CAPT_Skills/skills/<name>`.
 - [ ] Record retired/merged/split candidates explicitly so disappearance is never ambiguous.
 - [ ] Run the complete regression suite and capture exact commands/results in `GOAT_FORGE_REPORT.md`.

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 
@@ -8,10 +8,9 @@ class ForgePaths:
     hermes_live: Path
     hermes_bundled: Path
     hermes_optional: Path
-
-    @property
-    def staging_root(self) -> Path:
-        return self.repo_root / "staging"
+    quarantine_root: Path = field(
+        default_factory=lambda: Path.home() / ".capt-skill-forge" / "quarantine"
+    )
 
 
 def validate_source_roots(paths: ForgePaths) -> None:
