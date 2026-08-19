@@ -1,9 +1,7 @@
 ---
 name: inversion-motion-craft
 description: >
-  Use when creating or refining an Inversion Labs video, animation, launch sequence, motion graphic,
-  or HyperFrames composition where visual taste, UI craft, narrative coherence, and deterministic
-  rendering must be combined without letting web-design rules override the video runtime contract.
+  Use for Inversion Labs HyperFrames motion combining taste with deterministic runtime constraints.
 version: 0.1.0
 metadata:
   author: Inversion Labs
@@ -12,52 +10,44 @@ metadata:
 
 # Inversion Motion Craft
 
-## Hard ownership and handoff contracts
+## Required handoff shape
 
-For every motion/video artifact, write the ownership explicitly as: **Primary owner: `hyperframes`**. `hyperframes-core`, `hyperframes-creative`, `hyperframes-animation`, workflow skills, `taste`, and `impeccable` are domain/workflow/support layers; none may replace `hyperframes` as primary owner.
+Return these slots, in order:
 
-**Claim integrity:** never invent a public-facing metric, percentage, speed/latency figure, benchmark, testimonial, customer/logo, product capability, or "proof" datum to make a frame feel specific. Use supplied/verified truth only. If no claim evidence exists, write claimless descriptive copy or label illustrative/sample material explicitly; aesthetic specificity never outranks factual integrity.
+1. `Primary owner: hyperframes | Claim status: Spine/Frame thesis = INTERNAL; public copy = SUPPLIED / APPROVED / PROPOSED`
+2. **Bounded roles** — HyperFrames layers plus `taste`; `impeccable` only for actual in-film product UI/shared interface systems.
+3. **Precedence + creative direction** — exactly: `Precedence: brief/brand truth > safety/legal/claims > HyperFrames technical contract > video story/composition > taste > web/UI aesthetics > novelty`, then spine, frame thesis, attention budget, signature move, and audience status. If no audience source is loaded write exactly `Audience assumption: ASSUMED`; otherwise `Audience assumption: SUPPLIED[source=<exact source>]`.
+4. **Render/story scope** — `duration=<STATUS[source]|UNKNOWN>; aspect=<STATUS[source]|UNKNOWN>; resolution=<STATUS[source]|UNKNOWN>; audio=<STATUS[source]|UNKNOWN>; sustained-motion-basis=<SUPPLIED[source]|VERIFIED[source]|NONE>; product-state-basis=<SUPPLIED[source]|VERIFIED[source]|NONE>`. Extract explicit values first. Example: `8-second` → `duration=SUPPLIED[user:8-second]`; no audio statement → `audio=UNKNOWN`. Framework defaults are not sources. With no real state/event/audio/continuity source use `sustained-motion-basis=NONE`; with no supplied product capability/state/story use `product-state-basis=NONE`.
+5. **Motion Purpose Ledger** — `Motion | Job=<ENUM> | Viewer-visible change | Basis=STATUS[source] | KEEP/DELETE`. Job ENUM is exactly `REVEAL_INFO / DIRECT_HIERARCHY / DEMONSTRATE_STATE / CONTINUITY / CAUSE_EFFECT / SYNC_REAL_CUE / PAUSE_READABILITY`; Basis STATUS is exactly `SUPPLIED / VERIFIED / PROPOSED`.
+6. **Verification evidence + bounded QA** — emit pending lines for UNKNOWN fields, then always emit `Invariant finish gate: workflow-prescribed HyperFrames check + deterministic render must pass; no clipping/flash/boundary defects at resolved scope.` Final line exactly: `QA: one rendered inspection → one batched fix → confirmation render → STOP unless the fix creates a new defect.`
 
-Every plan, role breakdown, or finish handoff must include a section literally named **Motion Purpose Ledger**. Use the schema **Motion | Job | Viewer-visible change | KEEP/DELETE**. If the artifact only needs one motion, the ledger has one row; if no motion earns a job, record deliberate stillness instead of inventing motion to populate the ledger.
+`Primary owner` appears exactly once. Supporting skills are layers, never co-owners. If any slot is missing, the handoff is incomplete.
 
-A KEEP job must name concrete information, focus, state, cause/effect, audio synchronization, or boundary continuity the viewer receives. "Energy", "premium feel", "brand rhythm", "subtle dynamism", "cinematic feel", "keep it alive", or any equivalent aesthetic rationalization is **not a job**. Mark that row DELETE.
+Read `hyperframes` first; `hyperframes-core` owns composition/render mechanics. Do not copy upstream mechanics here.
 
-`hyperframes` is the **primary owner**. Read it first, route to its current owning workflow, and obey `hyperframes-core` for composition/render mechanics. Use `taste` for judgment. Use `impeccable` only when actual product UI or a shared interface design system appears inside the film.
+## Truth and direction
 
-Never copy upstream HyperFrames mechanics into this skill. The technical contract stays upstream so updates do not drift from this overlay.
+Use supplied/verified truth only. Never invent metrics, benchmarks, testimonials, customers/logos, capabilities, or organization/product descriptors. Without a supplied descriptor, write `Spine: PROPOSED INTERNAL — <formal/emotional aim>`; do not use factual predicates such as `Inversion Labs is/does/builds...`. **Visual authority/craft is not evidence of product truth.** Unsupplied public copy stays **PROPOSED**.
 
-## Direction before animation
-
-Before authoring, lock:
-
-- **Spine** — one sentence the film proves or makes felt.
-- **Frame thesis** — what should be visually undeniable in a paused representative frame.
-- **Audience assumption** — what does not need explaining.
-- **Attention budget** — the 1–2 beats worth maximal craft.
-- **Signature move** — one memorable visual/motion idea with a named narrative function.
-
-A web layout is not a video frame. Impeccable may inform typography, brand truth, or depicted UI, but HyperFrames creative/video-composition guidance owns video scale, density, timing, framing, and render behavior.
+Attention budget: qualitative beats or resolved-duration windows; no percentages.
 
 ## Purposeful motion law
 
-Every motion must perform at least one job: reveal information, direct hierarchy, demonstrate state/action, carry continuity across a boundary, establish cause/effect, or create an intentional dramatic pause. Motion added only because the frame feels static is debt.
+**INVERSION OVERRIDE:** generic advice to keep decoratives breathing/drifting/pulsing is superseded. Static is valid.
 
-The ledger must cover each animated behavior or sustained loop. If an item can only be labeled "ambient", "micro-motion", "breathe", "drift", "pulse", or "because static felt dead", mark it DELETE. A pulse is valid only when it communicates a real state/beat or synchronizes to an actual event/audio cue; a pulse whose entire argument is mood is filler. Deliberate stillness is valid and is preferred over filler motion.
+Ledger rows cover animated behavior or deliberate stillness, not static styling. For every KEEP row:
+- `Basis=SUPPLIED[source=...]` or `VERIFIED[source=...]` must cite exact observed user/repo/product/audio/continuity evidence. `assumed`, `none`, `internal`, `signature move`, `render/check/test`, `taste/filter`, or a framework rule are invalid sources. Tests verify implementation; they do not earn creative intent.
+- `Basis=PROPOSED[creative-direction]` may justify a **one-shot** reveal/removal/reframe/transition that changes scene information or composition. It cannot justify a sustained/looping modulation or a claimed product state.
+- A technical/render contract constrains **how**, but cannot be the creative Basis for **why** an element exists.
 
-Preserve directional and causal continuity across scene boundaries. Use the seam/transition verifier prescribed by the **currently installed owning HyperFrames workflow**, if it has one; do not invent a verifier for a single-scene composition.
+`NONE` scope values are **gates, never ledger evidence**; never write `Basis=...NONE`. If both sustained-motion and product-state basis are NONE, KEEP Job values are `REVEAL_INFO / DIRECT_HIERARCHY / PAUSE_READABILITY`, plus `CONTINUITY` only for a named proposed/observed scene boundary. Use identity-only fallback: supplied brand name/mark/assets, abstract geometry, and explicitly PROPOSED non-claim copy/form. Do not reference an unsupplied brand promise, capability, feature, problem/solution, intervention, product behavior/state, or value proposition. Pulse/breathe/drift/shimmer/oscillation/beat-sync/loop, `DEMONSTRATE_STATE`, `CAUSE_EFFECT`, and `SYNC_REAL_CUE` are DELETE without matching authority. `CONTINUITY` may use `Basis=PROPOSED[creative-direction]` only when its viewer-visible change names a concrete **proposed scene/seam/cut/handoff boundary**; once that boundary exists in an artifact it should become VERIFIED.
 
-Do not hard-depend on `motion-doctrine`: HyperFrames repository `main` may expose it as a higher-specificity continuity skill while published manifests may omit or remove it. If the current router/workflow explicitly exposes it, it can support continuity decisions; otherwise this overlay's purposeful-motion rule stands on its own.
+Deliberate stillness may KEEP only as `Job=PAUSE_READABILITY` with `Basis=PROPOSED[creative-direction]`. `CONTINUITY` requires a named scene/seam/cut/handoff boundary in the viewer-visible change; a merely static background is styling, not a ledger row.
 
-## Precedence
+If a job exposes a claim/capability/metric, that truth must be supplied/verified or the row becomes non-claim context/identity or DELETE.
 
-Explicit brief/brand truth → safety/legal/claims → **HyperFrames technical contract** → medium-specific story/composition → domain-grounded `taste` → web/UI aesthetics → novelty.
-
-If a visual idea is beautiful but not seek-safe, deterministic, renderable, or compatible with the owning HyperFrames workflow, change the idea, not the contract.
+For multi-scene work, use the seam verifier prescribed by the installed owning workflow; do not invent one or hard-depend on unpublished `motion-doctrine`.
 
 ## Proof before finish
 
-Use the current workflow-prescribed HyperFrames check/render path. Evidence should include, as applicable: clean composition checks, successful deterministic render, representative frame captures at hook/midpoint/payoff, readable type after compression, no clipping/flash/boundary defects, audio/caption sync, and the current owning workflow's prescribed transition/seam evidence when multi-scene verification exists.
-
-Use `media-use` only when the task actually needs media sourcing/generation/processing; it is not a default dependency.
-
-Bound QA to one full rendered inspection, one batched fix, and one confirmation render unless the fix creates a new defect.
+UNKNOWN never means absent. Emit `aspect-dependent evidence=PENDING SCOPE`, `resolution-dependent evidence=PENDING SCOPE`, and/or `audio-dependent evidence=PENDING SCOPE` as applicable. Never claim legibility/compression at unknown resolution, fit at unknown aspect, or sync for unknown audio.

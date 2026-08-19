@@ -40,7 +40,11 @@ The installer symlinks the source-of-truth skills into the shared Agent Skills d
 
 ```bash
 python3 tests/validate_pack.py
+python3 tests/final_post_smoke.py
+python3 tests/cross_medium_smoke.py
+python3 tests/grade_saved_outputs.py
+# Optional baseline-vs-overlay comparison:
 python3 tests/behavioral_eval.py
 ```
 
-The behavioral harness uses the local Ollama model `qwen3.5-defiant-fable:latest` and labels that evidence accordingly. Codex/Claude/Gemini smoke tests are recorded under `evals/` when available.
+The strict local release gate uses Ollama `qwen3.5-defiant-fable:latest` as a small-model stress harness plus human semantic review: **interface 16/16, motion 49/49, director 17/17, critic 13/13**. An independent larger local `qwen3.6-fable-fusion:latest` (27B Fable-Fusion) red-team found four material governance gaps; after bounded amendments, its second pass returned **RELEASE-CANDIDATE** with no BLOCKER or MATERIAL defects. HyperFrames v0.7.45 reports **9 current / 11 on-demand** skills, and installer symlink topology is verified across Agents, Claude, and Hermes roots.

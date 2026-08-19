@@ -9,9 +9,11 @@ evals/**/*-final.txt
 evals/hyperframes-*.json
 evals/parser-*.log
 
-# Keep compact machine-readable score evidence
-!evals/local-qwen/results.json
+# Keep compact release evidence
 !evals/local-qwen/final-results.json
+!evals/local-qwen/cross-medium-results.json
+!evals/local-qwen/redteam-27b-prepatch.txt
+!evals/local-qwen/redteam-27b-release.txt
 
 # Python build noise
 __pycache__/

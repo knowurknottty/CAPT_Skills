@@ -1,0 +1,134 @@
+Here is the red-team review of the four-skill composition layer.
+
+Overall: The layer is coherent and well-structured, but there are several material defects that can cause routing ambiguity, impossible contracts, and silent semantic failures. I’ve classified each finding and provided the smallest exact amendment.
+
+BLOCKER
+
+1) Creative Director vs Interface Craft: contradictory authority on interface ownership
+- Clause(s):
+  - inversion-creative-director → Required handoff shape → 2. Ownership table: “interface/web/product UI → inversion-interface-craft”
+  - inversion-interface-craft → Required handoff shape → 1. Ownership: “Primary owner: impeccable for every interface surface.”
+- Defect: One skill declares interface/web/product UI owned by inversion-interface-craft; the other declares impeccable as primary owner for every interface surface. This is a direct authority conflict that can cause dual ownership and conflicting decisions.
+- Fix:
+  - In inversion-creative-director, change:
+    - “interface/web/product UI → inversion-interface-craft”
+    to:
+    - “interface/web/product UI → inversion-interface-craft (primary owner: impeccable)”
+  - In inversion-interface-craft, change:
+    - “Primary owner: impeccable for every interface surface.”
+    to:
+    - “Primary owner: impeccable for every interface surface; skill owner: inversion-interface-craft.”
+
+2) Creative Director vs Creative Critic: acceptance authority conflict
+- Clause(s):
+  - inversion-creative-director → Required handoff shape → 7. Acceptance routing: “this skill does not issue PASS/FIX/NO-GO. Acceptance belongs to inversion-creative-critic.”
+  - inversion-creative-critic → Full acceptance path: returns Decision PASS/FIX/NO-GO/BLOCKED.
+- Defect: While not strictly contradictory, the Creative Director’s handoff shape does not define how it interacts with the critic’s decision when artifacts are inspectable. This can lead to silent override or ignored decisions.
+- Fix:
+  - In inversion-creative-director → Required handoff shape → 7. Acceptance routing, add:
+    - “When artifacts are inspectable, forward critic Decision (PASS/FIX/NO-GO/BLOCKED) verbatim; do not reinterpret.”
+
+3) Motion Craft: impossible Basis contract for multi-scene continuity
+- Clause(s):
+  - inversion-motion-craft → Motion Purpose Ledger: “Basis=STATUS[source] … SUPPLIED / VERIFIED / PROPOSED … CONTINUITY requires a named scene/seam/cut/handoff boundary …”
+  - inversion-motion-craft → Motion Purpose Ledger: “If both sustained-motion and product-state basis are NONE … KEEP Job values are only REVEAL_INFO / DIRECT_HIERARCHY / PAUSE_READABILITY.”
+- Defect: For multi-scene continuity, CONTINUITY requires a named seam, but if no explicit continuity source is supplied, sustained-motion-basis=NONE and product-state-basis=NONE, then CONTINUITY is forbidden. This makes continuity impossible unless continuity is explicitly supplied, which is not guaranteed.
+- Fix:
+  - In inversion-motion-craft → Motion Purpose Ledger, add:
+    - “If continuity is required but no explicit continuity source is supplied, set Basis=PROPOSED[creative-direction] and mark CONTINUITY as PROPOSED continuity; do not use CONTINUITY as VERIFIED/SUPPLIED.”
+
+4) Creative Critic: early return blocks legitimate partial acceptance
+- Clause(s):
+  - inversion-creative-critic → EARLY RETURN — unseen artifacts: “If the actual artifact/source/render is not supplied or accessible, use only this output shape and STOP.”
+- Defect: This blocks partial acceptance when some artifacts are available and others are not, forcing a full BLOCKED decision even when partial decisions are possible.
+- Fix:
+  - In inversion-creative-critic → EARLY RETURN — unseen artifacts, change:
+    - “If the actual artifact/source/render is not supplied or accessible, use only this output shape and STOP.”
+    to:
+    - “If any artifact/source/render is not supplied or accessible, emit BLOCKED for that artifact; emit normal acceptance for inspectable artifacts.”
+
+MATERIAL
+
+5) Creative Director: overconstraint on shared identity
+- Clause(s):
+  - inversion-creative-director → Required handoff shape → 3. Cross-medium identity: “Do not add per-medium signature moves, content blocks, scroll/cut/transition/grid/animation/interaction mechanics.”
+- Defect: This can block legitimate cross-medium coherence decisions that require medium-specific mechanics to realize shared identity.
+- Fix:
+  - In inversion-creative-director → Required handoff shape → 3. Cross-medium identity, change:
+    - “Do not add per-medium signature moves, content blocks, scroll/cut/transition/grid/animation/interaction mechanics.”
+    to:
+    - “Do not add per-medium signature moves unless required to realize shared identity; document them as PROPOSED.”
+
+6) Interface Craft: evidence scope override can block legitimate inference
+- Clause(s):
+  - inversion-interface-craft → Evidence and finish: “If any dimension is UNKNOWN, INVERSION OVERRIDE: generic Impeccable/marketing preflight defaults are suspended.”
+- Defect: This can block legitimate inference from upstream playbooks or product truth when some dimensions are unknown but others are known.
+- Fix:
+  - In inversion-interface-craft → Evidence and finish, change:
+    - “If any dimension is UNKNOWN, INVERSION OVERRIDE: generic Impeccable/marketing preflight defaults are suspended.”
+    to:
+    - “If any dimension is UNKNOWN, suspend only variant-dependent checks for that dimension; invariant checks may proceed.”
+
+7) Motion Craft: overconstraint on motion purpose
+- Clause(s):
+  - inversion-motion-craft → Motion Purpose Ledger: “Pulse/breathe/drift/shimmer/oscillation/beat-sync/loop, DEMONSTRATE_STATE, CAUSE_EFFECT, SYNC_REAL_CUE, and CONTINUITY are DELETE without matching authority.”
+- Defect: This can block legitimate motion purposes that are not explicitly supplied but are implied by product truth or creative direction.
+- Fix:
+  - In inversion-motion-craft → Motion Purpose Ledger, change:
+    - “Pulse/breathe/drift/shimmer/oscillation/beat-sync/loop, DEMONSTRATE_STATE, CAUSE_EFFECT, SYNC_REAL_CUE, and CONTINUITY are DELETE without matching authority.”
+    to:
+    - “Pulse/breathe/drift/shimmer/oscillation/beat-sync/loop, DEMONSTRATE_STATE, CAUSE_EFFECT, SYNC_REAL_CUE, and CONTINUITY are DELETE unless supported by SUPPLIED/VERIFIED source or PROPOSED[creative-direction].”
+
+8) Creative Critic: decision semantics ambiguity
+- Clause(s):
+  - inversion-creative-critic → Decision semantics: “PASS — no release-critical VERIFIED defect; critical claims/evidence resolved.”
+- Defect: This can lead to PASS decisions when non-critical defects exist that materially weaken function, identity, or craft.
+- Fix:
+  - In inversion-creative-critic → Decision semantics, change:
+    - “PASS — no release-critical VERIFIED defect; critical claims/evidence resolved.”
+    to:
+    - “PASS — no release-critical VERIFIED defect; critical claims/evidence resolved; no material non-critical defects.”
+
+MINOR
+
+9) Creative Director: evidence status ambiguity
+- Clause(s):
+  - inversion-creative-director → Required handoff shape → 5. Evidence status: “use only VERIFIED / INFERRED / UNVERIFIED / BLOCKED and report the current status.”
+- Defect: This can lead to inconsistent evidence status reporting across skills.
+- Fix:
+  - In inversion-creative-director → Required handoff shape → 5. Evidence status, change:
+    - “use only VERIFIED / INFERRED / UNVERIFIED / BLOCKED and report the current status.”
+    to:
+    - “use only VERIFIED / INFERRED / UNVERIFIED / BLOCKED; align with inversion-creative-critic evidence semantics.”
+
+10) Interface Craft: precedence ambiguity
+- Clause(s):
+  - inversion-interface-craft → Precedence: “Explicit brief/product truth → safety/accessibility/legal → interaction/platform contract → incumbent brand/content constraints → domain-grounded taste → anti-slop heuristics/dials/novelty.”
+- Defect: This can lead to precedence conflicts when taste and novelty are in tension.
+- Fix:
+  - In inversion-interface-craft → Precedence, change:
+    - “Explicit brief/product truth → safety/accessibility/legal → interaction/platform contract → incumbent brand/content constraints → domain-grounded taste → anti-slop heuristics/dials/novelty.”
+    to:
+    - “Explicit brief/product truth → safety/accessibility/legal → interaction/platform contract → incumbent brand/content constraints → domain-grounded taste → anti-slop heuristics/dials/novelty; taste outranks novelty.”
+
+11) Motion Craft: render/story scope ambiguity
+- Clause(s):
+  - inversion-motion-craft → Required handoff shape → 4. Render/story scope: “Extract explicit values first.”
+- Defect: This can lead to inconsistent scope extraction when values are implied but not explicit.
+- Fix:
+  - In inversion-motion-craft → Required handoff shape → 4. Render/story scope, change:
+    - “Extract explicit values first.”
+    to:
+    - “Extract explicit values first; mark implied values as PROPOSED.”
+
+12) Creative Critic: stop condition ambiguity
+- Clause(s):
+  - inversion-creative-critic → EARLY RETURN — unseen artifacts: “Stop: one inspection → one batched correction → one confirmation → STOP; reopen only for new defect, changed brief/artifact, or explicit request.”
+- Defect: This can lead to inconsistent stop conditions across skills.
+- Fix:
+  - In inversion-creative-critic → EARLY RETURN — unseen artifacts, change:
+    - “Stop: one inspection → one batched correction → one confirmation → STOP; reopen only for new defect, changed brief/artifact, or explicit request.”
+    to:
+    - “Stop: one inspection → one batched correction → one confirmation → STOP; reopen only for new defect, changed brief/artifact, or explicit request; align with inversion-creative-director delegation.”
+
+Conclusion: The layer has several BLOCKER and MATERIAL defects that need to be addressed before release. The MINOR defects are residual risks that can be addressed in a subsequent iteration.

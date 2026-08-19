@@ -1,0 +1,8 @@
+RELEASE-CANDIDATE
+
+Residual MINOR risks:
+
+- Motion ledger edge: If sustained-motion-basis=NONE and product-state-basis=NONE, CONTINUITY is allowed only for a named proposed scene boundary; ambiguity in naming that boundary could cause inconsistent KEEP/DELETE decisions.
+- Interface scope gating: When all variant dimensions are UNKNOWN, checks are PENDING SCOPE; if scope resolution is delayed, QA may stall until explicit scope is provided.
+- Creative director delegation: Director must not author child mechanics; risk of over-specification in handoff if director includes implementation details beyond noun-level motif.
+- Creative critic early return: Requires explicit artifact availability; if artifacts are partially available, decision may be BLOCKED until all required evidence is supplied.

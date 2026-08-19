@@ -1,9 +1,8 @@
 ---
 name: inversion-creative-critic
 description: >
-  Use when deciding whether an Inversion Labs interface, video, visual system, or cross-medium launch
-  package is actually good enough to ship, especially when it looks polished but may still be generic,
-  incoherent, ungrounded, overworked, technically unproven, or aesthetically impressive for the wrong reason.
+  Use to decide whether an Inversion Labs interface, video, visual system, or cross-medium package
+  is good enough to ship without confusing polish, preference, inference, and proof.
 version: 0.1.0
 metadata:
   author: Inversion Labs
@@ -12,50 +11,55 @@ metadata:
 
 # Inversion Creative Critic
 
-Judge the artifact's job before its decoration. This is an acceptance gate, not an invitation to endless art direction.
+This is an **acceptance gate**, not an art-direction generator.
 
-Use the relevant medium owner for technical evidence (`inversion-interface-craft` or `inversion-motion-craft`) and `taste` for domain-grounded judgment. For a package, judge each artifact in its own medium and then judge the identity between them.
+## EARLY RETURN — unseen artifacts
 
-## Evidence states
+If **no** relevant artifact/source/render is supplied or accessible, use **only** this output shape and STOP. If availability is mixed, evaluate each inspectable artifact normally, mark unavailable artifacts BLOCKED, and make the package decision BLOCKED whenever release acceptance depends on those missing artifacts.
 
-Label material findings:
+1. `Decision: BLOCKED`
+2. `Evidence states: VERIFIED / INFERRED / UNVERIFIED / BLOCKED`
+3. Factual evidence rows exactly:
+   - `Artifact availability=BLOCKED`
+   - `Claim truth=UNVERIFIED`
+   - `Web technical fitness=UNVERIFIED/BLOCKED — scope unresolved`
+   - `Film technical fitness=UNVERIFIED/BLOCKED — scope unresolved`
+   - `Cross-medium coherence=UNVERIFIED`
+4. `Qualitative risks (INFERRED):` only risks supported by the user's description; do not claim a hierarchy, spine, state, claim, accessibility property, or render property is present/absent.
+5. `Cross-medium criterion: shared identity; different composition per medium; status=UNVERIFIED.`
+6. Decision-changing actions exactly, with **no parentheses/subchecks**:
+   - obtain/access actual web artifact + resolved Evidence scope
+   - obtain/access actual film/render + resolved Render/story scope
+   - obtain governing brief/product truth
+7. `Stop: one inspection → one batched correction → one confirmation → STOP; reopen only for new defect, changed brief/artifact, or explicit request.` **This is the final output line. Emit nothing after it.**
 
-- **VERIFIED** — directly observable from artifact/source/render/test/metric.
-- **INFERRED** — aesthetic, usability, or strategic judgment supported by cited observations.
-- **UNVERIFIED** — not yet checked.
-- **BLOCKED** — evidence required for acceptance is unavailable.
+Do not enumerate breakpoints, devices, themes/locales, states, accessibility controls, audio/captions, players, render formats, or verification subchecks until the relevant medium owner resolves scope. A supplied remark such as “looks polished” supports only a qualitative INFERRED risk, never a VERIFIED technical/factual finding.
 
-Never present an INFERRED preference as a VERIFIED defect.
+## Full acceptance path — only when artifacts are inspectable
 
-## Two-pass critique
+Use `inversion-interface-craft` or `inversion-motion-craft` for medium evidence and `taste` for domain-grounded judgment.
 
-### 1. Truth and fitness
-Check the job, factual claims, interaction/task completion, accessibility/safety, medium correctness, content hierarchy, responsive/render integrity, and required states. A beautiful failure here is still a failure.
+Return:
+1. **Decision** — `PASS / FIX / NO-GO / BLOCKED`.
+2. **Evidence table** — factual/technical findings use only `VERIFIED / UNVERIFIED / BLOCKED`; qualitative judgments/risks use `INFERRED`.
+3. **Truth + fitness** — job, claims, core interaction/render, accessibility/safety, hierarchy, required states, medium correctness.
+4. **Craft + taste** — domain/audience fit, spine, signal-to-noise, identity coherence, medium fitness, novelty utility, calibrated finish.
+5. **Cross-medium identity** when applicable — shared thesis/palette/type/voice/image treatment/motif with different composition per medium.
+6. **Decision-changing actions** — smallest set that can change the decision.
+7. **Stop condition** — one inspection → one batched correction → one confirmation → STOP.
 
-### 2. Craft and taste
-Evaluate a profile rather than hiding judgment in one opaque score:
+### Evidence semantics
 
-- domain grounding and audience fit
-- spine / message hierarchy
-- specificity and signal-to-noise
-- identity coherence
-- medium fitness
-- novelty utility: what does the unusual choice buy?
-- calibrated finish: underdone, right, or overworked
+- **VERIFIED** — directly observed in supplied/accessed artifact, source, render, device/browser, test, metric, or authoritative supplied fact.
+- **INFERRED** — qualitative aesthetic/usability/strategic judgment or risk; never factual claim truth or technical pass/fail.
+- **UNVERIFIED** — relevant but not checked.
+- **BLOCKED** — acceptance requires unavailable evidence.
 
-When the web page and film are a package, require shared identity at the level of thesis, palette/type/voice, image treatment, and signature motif. **Do not require identical composition.** A video should not look like a scrolling webpage and a dashboard should not look like a title card.
+A preference is never a VERIFIED defect.
 
-## Decision
+### Decision semantics
 
-Return one:
-
-- **PASS** — no release-critical verified defect; critical claims have evidence; remaining notes are optional taste improvements.
-- **FIX** — bounded, repairable defects materially weaken function, identity, or craft.
-- **NO-GO** — a foundational mismatch, false/unsafe claim, broken core interaction/render, or wrong medium requires redesign/rework before release.
-- **BLOCKED** — acceptance depends on evidence that cannot currently be obtained.
-
-Prioritize the smallest set of changes that can change the decision. Do not manufacture a backlog to look thorough.
-
-## Stop condition
-
-One complete inspection pass → one batched correction pass → one confirmation pass. Stop when the acceptance decision is stable and further changes would not materially improve the audience's experience. Re-open only for a new defect, changed brief, changed artifact, or explicit user request.
+- **PASS** — no release-critical VERIFIED defect; critical claims/evidence resolved; no remaining material defect that would weaken function, identity, or craft.
+- **FIX** — bounded verified defects materially weaken function, identity, or craft.
+- **NO-GO** — foundational mismatch, false/unsafe claim, broken core interaction/render, or wrong medium requires rework.
+- **BLOCKED** — required acceptance evidence unavailable.

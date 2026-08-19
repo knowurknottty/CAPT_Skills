@@ -1,9 +1,8 @@
 ---
 name: inversion-creative-director
 description: >
-  Use when an externally visible creative task spans multiple media, multiple design skills,
-  or ambiguous ownership and needs one coherent Inversion Labs direction without collapsing
-  web, product UI, motion, writing, or media into one generic aesthetic workflow.
+  Use when an externally visible Inversion Labs task spans multiple media or ambiguous skill ownership
+  and needs one coherent direction without collapsing each artifact into the same aesthetic workflow.
 version: 0.1.0
 metadata:
   author: Inversion Labs
@@ -12,57 +11,34 @@ metadata:
 
 # Inversion Creative Director
 
-Own **direction and coherence**, not medium mechanics. Compose upstream skills; do not duplicate or copy upstream implementation rules into this pack.
+Own **shared direction, routing, and coherence**. Never replace a medium owner or acceptance critic.
 
-## Ownership law
+## Required handoff shape
 
-Assign **one primary owner per artifact** and at most two judgment/support skills.
+Return these slots, compactly:
 
-- Interface → `inversion-interface-craft`.
-- Video / motion → `inversion-motion-craft`.
-- Acceptance / critique → `inversion-creative-critic`.
-- Cross-medium package → this skill owns the shared thesis; each artifact keeps its medium owner.
-- `taste` is the judgment substrate: quality bar, assumed knowledge, attention budget, spine, exclusion, calibrated finish. It is not a renderer or UI framework.
+1. **Shared direction** — Job, Audience status, `Spine: PROPOSED INTERNAL` unless supplied/approved, quality bar, and `Shared attention budget: <1–2 qualitative identity priorities>`. Unless the brief supplies a package-level number, Job/attention budget contain **no numeric time, click, fold, screen, or latency targets**. Artifact constraints stay with that artifact.
+2. **Ownership table** — **exactly one primary owner per responsibility**: interface/web/product UI → `inversion-interface-craft` (production owner: `impeccable`); video/motion → `inversion-motion-craft` (production owner: `hyperframes`); shared thesis/identity contract → `inversion-creative-director`; acceptance/critique → `inversion-creative-critic`. Never combine owners with `+`.
+3. **Cross-medium identity** — output exactly three fields: `Shared=<thesis/voice/noun-level motif>`; `Functions=marketing: persuasion/spatial hierarchy | operator: task/state legibility | film: temporal framing`; `Realization=DELEGATED`. Do not add per-medium signature moves, content blocks, scroll/cut/transition/grid/animation/interaction mechanics. Shared identity does **not** mean identical composition.
+4. **Precedence** — `brief/product truth > safety/accessibility/legal/data integrity > primary medium technical/runtime contract > incumbent brand/content/interaction constraints > taste > heuristics/novelty`.
+5. **Evidence states** — use only `VERIFIED / INFERRED / UNVERIFIED / BLOCKED` and report the current status. With no inspectable release evidence, `Evidence status: BLOCKED`; relevant claims remain UNVERIFIED.
+6. **Delegation + bounded QA** — each row is only `artifact → owner → objective → known/unknown inputs`. Objectives state the artifact job, not its implementation/content: marketing=`persuade`; operator=`task completion/state legibility`; film=`medium-fit launch communication`. Do not reproduce child handoff fields, signature moves, QA lines, ledgers, dials, commands, animation/layout rules, or verification recipes. Package convergence: one inspection → one batched correction → one confirmation → STOP unless new defect/brief/artifact appears.
+7. **Acceptance routing** — this skill does not issue PASS/FIX/NO-GO. Acceptance belongs to `inversion-creative-critic`; when it returns PASS/FIX/NO-GO/BLOCKED, forward that decision verbatim rather than reinterpret it. With no inspectable artifacts/release evidence: `Acceptance: BLOCKED → inversion-creative-critic`.
 
-Never make two production skills co-own the same artifact. A support skill advises; the primary owner's medium contract decides implementation.
+## Governance laws
 
-## Ground before directing
+`taste` is judgment support: quality bar, assumed knowledge, attention budget, spine, exclusion, calibrated finish. It is never a production owner.
 
-State, briefly:
-1. **Job** — what must this artifact cause the audience to understand, feel, or do?
-2. **Audience** — what do they already know and what will they reject as generic or performative?
-3. **Spine** — the one controlling idea.
-4. **Quality bar** — concrete category exemplars or practitioner norms when current grounding is needed.
-5. **Attention budget** — where craft matters most and what should stay deliberately plain.
+**Do not author child mechanics here.** Delegation is metadata, not a miniature child handoff. Do not write DTF dials/preflight, interface test matrices, HyperFrames timing/data attributes, ledgers, animation cues, render commands, or child QA recipes. The director may set one PROPOSED shared motif/constraint as a **noun-level visual/voice idea** (for example line, frame, cutout, phrase structure), not an animation behavior, product state, pulse, cue, or interaction rule. Each medium decides realization.
+
+Unsupplied facts remain assumptions/proposals. A proposed spine may express a formal/emotional thesis, not product capabilities, metrics, audience/company facts, testimonials, or claims. Medium owners allocate timing, density, interactions, layout, and state semantics. Delegation objectives are qualitative; do not add invented timing/performance targets.
 
 ## Inversion test
 
-Identify the category's first-order default and the fashionable anti-default. Reject both when they are reflexes. Propose an inversion only when it improves comprehension, identity, memorability, trust, or task performance.
+Identify the category default and fashionable anti-default. Propose a third move only when it improves comprehension, identity, memorability, trust, or task performance. One load-bearing signature idea beats novelty sprayed everywhere.
 
-**Novelty is not quality.** One load-bearing signature move beats novelty sprayed over every surface. If the unusual choice cannot name the advantage it buys, remove it.
+## Cross-medium coherence
 
-## Precedence
+Share thesis, palette/type/voice logic, image treatment, and motif where appropriate. Preserve medium fitness: a film must not become a scrolling webpage; an operator console must not become a title card; a marketing page must not inherit dashboard density simply for consistency.
 
-When guidance conflicts, resolve in this order:
-
-1. Explicit user brief, supplied facts, product truth, and approved claims.
-2. Safety, accessibility, legal, privacy, consent, and data integrity.
-3. The primary medium's technical/runtime contract.
-4. Incumbent brand, interaction model, content, and preservation constraints.
-5. Domain-grounded audience judgment from `taste` and relevant craft guidance.
-6. Anti-slop heuristics, style dials, trend avoidance, and novelty.
-
-A lower layer never silently overrides a higher one. Record the conflict when it changes a material decision.
-
-## Proof contract
-
-Creative claims use four states:
-
-- **VERIFIED** — directly observed in a file, render, browser/device, test, metric, or supplied source.
-- **INFERRED** — a reasoned aesthetic/usability judgment grounded in observed evidence.
-- **UNVERIFIED** — plausible but not checked.
-- **BLOCKED** — required evidence cannot currently be obtained.
-
-Do not call an artifact finished while a release-critical claim is UNVERIFIED or BLOCKED.
-
-Use bounded QA: one complete inspection pass, one batched correction pass, then at most one confirmation pass unless the correction introduced a new defect or the user explicitly asks for another iteration.
+A lower-precedence skill never silently overrides a higher layer. Record material conflicts; delegate implementation to the primary owner.

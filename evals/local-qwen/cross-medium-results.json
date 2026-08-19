@@ -1,0 +1,36 @@
+{
+  "director": {
+    "landing_interface_owner": true,
+    "dashboard_interface_owner": true,
+    "film_motion_owner": true,
+    "one_owner_language": true,
+    "proposed_internal_spine": true,
+    "shared_thesis_not_same_layout": true,
+    "precedence": true,
+    "evidence_states": true,
+    "unknown_scope_not_invented": true,
+    "no_cross_media_constraint_leak": true,
+    "shared_attention_qualitative": true,
+    "shared_motif_not_motion_rule": true,
+    "bounded_qa": true,
+    "no_child_mechanics": true,
+    "acceptance_blocked": true,
+    "no_director_pass": true,
+    "compact": true
+  },
+  "critic": {
+    "decision_blocked_without_artifacts": true,
+    "no_invented_verified_defect": true,
+    "claims_not_inferred": true,
+    "technical_not_inferred": true,
+    "no_invented_evidence_scope": true,
+    "no_pseudo_observation": true,
+    "evidence_states": true,
+    "separates_inference": true,
+    "medium_specific": true,
+    "not_identical_composition": true,
+    "bounded_stop": true,
+    "blocked_early_return_stops": true,
+    "compact": true
+  }
+}

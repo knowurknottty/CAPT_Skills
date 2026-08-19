@@ -49,6 +49,18 @@ if all_text:
     if "brief" not in all_text.lower() or "safety" not in all_text.lower() or "technical" not in all_text.lower():
         errors.append("pack: precedence lacks brief/safety/technical layers")
 
+# 27B red-team regression invariants.
+contracts = {
+    "inversion-creative-director": ["production owner: `impeccable`", "forward that decision verbatim"],
+    "inversion-interface-craft": ["suspend only checks that depend on that dimension", "production owner=`impeccable`"],
+    "inversion-motion-craft": ["proposed scene/seam/cut/handoff boundary", "once that boundary exists in an artifact it should become VERIFIED"],
+    "inversion-creative-critic": ["If **no** relevant artifact/source/render", "If availability is mixed"],
+}
+for name, needles in contracts.items():
+    text=(SKILLS/name/"SKILL.md").read_text()
+    for needle in needles:
+        if needle.lower() not in text.lower(): errors.append(f"{name}: missing red-team regression token {needle!r}")
+
 if errors:
     print("FAIL")
     for e in errors:
