@@ -1,0 +1,26 @@
+{
+  "interface": {
+    "passed": 5,
+    "total": 5,
+    "checks": {
+      "impeccable_owns": true,
+      "dashboard_excludes_marketing_taste": true,
+      "precedence": true,
+      "bounded_stop": true,
+      "evidence": true
+    }
+  },
+  "motion": {
+    "passed": 7,
+    "total": 7,
+    "checks": {
+      "root_hyperframes_owner": true,
+      "impeccable_conditional": true,
+      "technical_contract_wins": true,
+      "motion_purpose_ledger": true,
+      "ledger_has_decision_schema": true,
+      "render_evidence": true,
+      "claim_integrity": true
+    }
+  }
+}

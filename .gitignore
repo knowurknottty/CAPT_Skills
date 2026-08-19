@@ -1,0 +1,21 @@
+# Regenerable / machine-local evaluation artifacts
+evals/**/*.log
+evals/**/*.err
+evals/**/*.out
+evals/**/*-baseline.txt
+evals/**/*-post.txt
+evals/**/*-post-v2.txt
+evals/**/*-final.txt
+evals/hyperframes-*.json
+evals/parser-*.log
+
+# Keep compact machine-readable score evidence
+!evals/local-qwen/results.json
+!evals/local-qwen/final-results.json
+
+# Python build noise
+__pycache__/
+*.pyc
+
+# Superseded intermediate score file
+evals/local-qwen/results.json
