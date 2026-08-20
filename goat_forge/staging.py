@@ -93,3 +93,51 @@ def is_capt_candidate(record: SkillRecord) -> bool:
         return False
     haystack = f"{record.relative_path}/{record.name}"
     return bool(_CAPT_TOKEN.search(haystack))
+
+
+@dataclass(frozen=True)
+class DonorSelection:
+    name: str
+    source_lane: str
+    relative_path: str
+    tree_sha256: str
+    action: str
+
+    def __post_init__(self) -> None:
+        if self.action not in {"HARDEN", "REWRITE", "SPLIT", "MERGE", "RETIRE"}:
+            raise ValueError(f"unsupported forge action: {self.action}")
+
+    @property
+    def identity(self) -> tuple[str, str, str]:
+        return (self.name, self.source_lane, self.relative_path)
+
+
+def select_exact_donors(
+    records: list[SkillRecord],
+    selections: list[DonorSelection],
+) -> list[tuple[SkillRecord, DonorSelection]]:
+    seen: set[tuple[str, str, str]] = set()
+    by_identity: dict[tuple[str, str, str], list[SkillRecord]] = {}
+    for record in records:
+        key = (record.name, record.source_lane, record.relative_path)
+        by_identity.setdefault(key, []).append(record)
+
+    selected: list[tuple[SkillRecord, DonorSelection]] = []
+    for selection in selections:
+        key = selection.identity
+        if key in seen:
+            raise ValueError(f"duplicate selection: {key}")
+        seen.add(key)
+        matches = by_identity.get(key, [])
+        if not matches:
+            raise ValueError(f"missing donor: {key}")
+        if len(matches) != 1:
+            raise ValueError(f"ambiguous donor: {key}")
+        record = matches[0]
+        if record.tree_sha256 != selection.tree_sha256:
+            raise ValueError(
+                f"donor digest mismatch for {selection.name}: "
+                f"inventory={record.tree_sha256} selection={selection.tree_sha256}"
+            )
+        selected.append((record, selection))
+    return selected

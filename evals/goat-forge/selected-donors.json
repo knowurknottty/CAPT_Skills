@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "selected": [
+    {
+      "action": "REWRITE",
+      "name": "goat-skill-router-core-contract",
+      "relative_path": "goat-harvest/goat-skill-router-core-contract",
+      "source_lane": "live",
+      "tree_sha256": "ccb24f4b4ae252fdcd93217334a2c0912e36b7a8f780261c906a8472971bb74e"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-agent-workflows-productivity",
+      "relative_path": "goat-harvest/goat-agent-workflows-productivity",
+      "source_lane": "live",
+      "tree_sha256": "052431a9c6dcff6bb21fa82674ba316e59d8d5530c375d6f4dde745abc03537c"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-backend-data-payments",
+      "relative_path": "goat-harvest/goat-backend-data-payments",
+      "source_lane": "live",
+      "tree_sha256": "41a3f3f0a9055ec79cb6645d17bb48455390cef94676b8ae0310f15ada177ef2"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-cloud-infra-iac",
+      "relative_path": "goat-harvest/goat-cloud-infra-iac",
+      "source_lane": "live",
+      "tree_sha256": "db7319a0d5b8e5cc92cf2dfbfda925a649aa4563a285d046714ae01cecc034e6"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-databases-sql-nosql-edge-data",
+      "relative_path": "goat-harvest/goat-databases-sql-nosql-edge-data",
+      "source_lane": "live",
+      "tree_sha256": "ac1c54373469c027e9613c51a16b1619d276ed879773bded25cffd8b8357882a"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-llm-mcp-rag-agentic",
+      "relative_path": "goat-harvest/goat-llm-mcp-rag-agentic",
+      "source_lane": "live",
+      "tree_sha256": "2ddebd9df3f991e7596b475614c6c81e8da13461f6104a0feb1b43cb51a27d89"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-testing-tdd-browser-automation",
+      "relative_path": "goat-harvest/goat-testing-tdd-browser-automation",
+      "source_lane": "live",
+      "tree_sha256": "da2e34fd99e5767f8e8aaa1f7f70a3a9a24f1037c841325b0e60b4e13e81eba3"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-mobile-native-expo",
+      "relative_path": "goat-harvest/goat-mobile-native-expo",
+      "source_lane": "live",
+      "tree_sha256": "d6856f6ebb692d4c174b28d62d1e5c3681747e56eef90e945a4553c8708d328e"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-marketing-seo-growth-content",
+      "relative_path": "goat-harvest/goat-marketing-seo-growth-content",
+      "source_lane": "live",
+      "tree_sha256": "12983f839e9fb80b0154cacd2f3ef0461fc4ce04eb87395a462bda6b45bc786d"
+    },
+    {
+      "action": "REWRITE",
+      "name": "goat-frontend-design-nextjs",
+      "relative_path": "goat-harvest/goat-frontend-design-nextjs",
+      "source_lane": "live",
+      "tree_sha256": "5654104157615268c14cf59791ed09bbad71be5ec475c7a6f42cf7b12dab3983"
+    },
+    {
+      "action": "REWRITE",
+      "name": "systematic-debugging",
+      "relative_path": "software-development/systematic-debugging",
+      "source_lane": "bundled",
+      "tree_sha256": "e5c84930f7982c2d1182bc2281b98d8e098f2c1c782d4b55c906e114b193b127"
+    },
+    {
+      "action": "HARDEN",
+      "name": "test-driven-development",
+      "relative_path": "software-development/test-driven-development",
+      "source_lane": "bundled",
+      "tree_sha256": "55cd2c945f081174fae01eb2d1e9c7c568a60d51698d6bbf5567dba239d8d00d"
+    },
+    {
+      "action": "HARDEN",
+      "name": "subagent-driven-development",
+      "relative_path": "software-development/subagent-driven-development",
+      "source_lane": "optional",
+      "tree_sha256": "bd84e2e2ccc18d4355237b889952413d68801a4a6a5d82a2bca53f1f92ad162b"
+    },
+    {
+      "action": "SPLIT",
+      "name": "verify-before-claim",
+      "relative_path": "verify-before-claim",
+      "source_lane": "live",
+      "tree_sha256": "ffb90dadc1ff99b73d15fe369a7be628900b4960b0f1a4eb7d81ec5096e827f1"
+    },
+    {
+      "action": "SPLIT",
+      "name": "verification-workflows",
+      "relative_path": "software-development/verification-workflows",
+      "source_lane": "live",
+      "tree_sha256": "0ecc9753f3caa8df3ad84c8afd3b1358c7f6458c8995d00871246046903683fc"
+    },
+    {
+      "action": "REWRITE",
+      "name": "codebase-archaeology",
+      "relative_path": "software-development/codebase-archaeology",
+      "source_lane": "live",
+      "tree_sha256": "5c8261c55091714501bb72a75fc7c3674004f74f6de715c077d87d7892400c6b"
+    },
+    {
+      "action": "REWRITE",
+      "name": "repository-hygiene",
+      "relative_path": "software-development/repository-hygiene",
+      "source_lane": "live",
+      "tree_sha256": "f6ad9206529f88b21ac37d1d42385417e2de6f7d8d585d372d416962382ff98f"
+    },
+    {
+      "action": "REWRITE",
+      "name": "stacked-pr-decomposition",
+      "relative_path": "software-development/stacked-pr-decomposition",
+      "source_lane": "live",
+      "tree_sha256": "5ad7b1ddd8b33469c10ba84343084074c8d31179e511e25e130b3c1b32d4aa33"
+    },
+    {
+      "action": "REWRITE",
+      "name": "frozen-baseline-integration",
+      "relative_path": "frozen-baseline-integration",
+      "source_lane": "live",
+      "tree_sha256": "efbacdda0a5c9be66d620d0b6d1c622d07aff3281adb4e394b270ddb126b965e"
+    },
+    {
+      "action": "HARDEN",
+      "name": "external-driver-conformance",
+      "relative_path": "software-development/external-driver-conformance",
+      "source_lane": "live",
+      "tree_sha256": "493c0428fb72b57e7b9677945d67992744f2e4609e02c371a30676be018dddfd"
+    },
+    {
+      "action": "HARDEN",
+      "name": "cross-language-schema-bindings",
+      "relative_path": "software-development/cross-language-schema-bindings",
+      "source_lane": "live",
+      "tree_sha256": "8dd03ec723328cac64e15d2c334138ef5565869930b4c0604d0613e2ffec7b5e"
+    },
+    {
+      "action": "REWRITE",
+      "name": "skill-curation",
+      "relative_path": "hermes/skill-curation",
+      "source_lane": "live",
+      "tree_sha256": "c7149bbacb7366f9b9cd1cabc6d2c032ad1667e275d324b3b94481572825be00"
+    },
+    {
+      "action": "REWRITE",
+      "name": "cross-session-skill-harvest",
+      "relative_path": "software-development/cross-session-skill-harvest",
+      "source_lane": "live",
+      "tree_sha256": "20d5e2925625ff28177ad2d5c9eecb7785037416b922cf90de4a830d4c8cab08"
+    },
+    {
+      "action": "HARDEN",
+      "name": "agent-self-modification-governance",
+      "relative_path": "software-development/agent-self-modification-governance",
+      "source_lane": "live",
+      "tree_sha256": "1a2a500bb6c81ac31ef16b95224d3ca0a519c1a13d61feb85114bcc667c8f96c"
+    },
+    {
+      "action": "HARDEN",
+      "name": "adversarial-integration-audit",
+      "relative_path": "software-development/adversarial-integration-audit",
+      "source_lane": "live",
+      "tree_sha256": "1289ad8611e06d53e2e8b2450d367883d00430755a7e555a89b22a53f9cfde3d"
+    },
+    {
+      "action": "HARDEN",
+      "name": "secure-command-execution",
+      "relative_path": "security/secure-command-execution",
+      "source_lane": "live",
+      "tree_sha256": "0d3222f48a057c1daae86342c2f40dbccc2ef6e7ba7c5e8dc1b51a88fadb6685"
+    },
+    {
+      "action": "SPLIT",
+      "name": "continuous-research-cycle",
+      "relative_path": "continuous-research-cycle",
+      "source_lane": "live",
+      "tree_sha256": "04310ade9a25c8c7a47802f79bc11555a81d396e5376c76218952b26c9b971e1"
+    },
+    {
+      "action": "REWRITE",
+      "name": "deep-research",
+      "relative_path": "research/deep-research",
+      "source_lane": "live",
+      "tree_sha256": "04ed44c634e7ed0b4718be68a2243a2e3830513f9efd2453379f185fd21179b3"
+    },
+    {
+      "action": "REWRITE",
+      "name": "forensic-architecture-reconstruction",
+      "relative_path": "mlops/forensic-architecture-reconstruction",
+      "source_lane": "live",
+      "tree_sha256": "01c1991b8ce350dd280803fce89c5b96dbd069c6ebc54064f8d62138b2a73a27"
+    },
+    {
+      "action": "REWRITE",
+      "name": "registry-driven-ecosystem",
+      "relative_path": "software-development/registry-driven-ecosystem",
+      "source_lane": "live",
+      "tree_sha256": "e1c5eb69a40d79d323cd5d03aedaecfc902f57de6d8275c23dc17f3114c9e978"
+    },
+    {
+      "action": "HARDEN",
+      "name": "deployment-resilience-verification",
+      "relative_path": "devops/deployment-resilience-verification",
+      "source_lane": "live",
+      "tree_sha256": "f4412c4c8c4d508e2aeea1f911f7412e4324924a9c6a0922804dda05c737861c"
+    },
+    {
+      "action": "HARDEN",
+      "name": "mcp-server-engineering",
+      "relative_path": "software-development/mcp-server-engineering",
+      "source_lane": "live",
+      "tree_sha256": "4d6f799f0effb5d434ff5088aa46f67f4a98d87136f817e8a730d7af5ff13bda"
+    },
+    {
+      "action": "REWRITE",
+      "name": "security-toolkit",
+      "relative_path": "security/security-toolkit",
+      "source_lane": "live",
+      "tree_sha256": "928c3ac3fe517b9ed1335c4fda8bce182eedcaaa45048340c594891672ed3a1c"
+    },
+    {
+      "action": "HARDEN",
+      "name": "macos-computer-use",
+      "relative_path": "apple/macos-computer-use",
+      "source_lane": "live",
+      "tree_sha256": "01e9ec4997f52a4ac75741e0b5f89b240d784c8352d74aef98b8742c13a1e5aa"
+    }
+  ],
+  "selection_state": "HUMAN_REVIEWED_GOAT_CANDIDATE"
+}
