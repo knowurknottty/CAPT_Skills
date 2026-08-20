@@ -1,12 +1,13 @@
 {
   "by_lane": {
     "bundled": 79,
+    "linked": 18,
     "live": 385,
     "optional": 114
   },
   "frontmatter": {
     "MISSING": 6,
-    "OK": 572
+    "OK": 590
   },
-  "total": 578
+  "total": 596
 }

@@ -160,3 +160,28 @@ def test_portable_path_collapses_home_prefix_without_touching_external_paths():
 
     assert portable_path(inside, home=home) == "~/.hermes/skills/alpha"
     assert portable_path(outside, home=home) == "/opt/shared/skill"
+
+
+def test_linked_skill_inventory_handles_direct_and_container_targets(tmp_path: Path):
+    from goat_forge.inventory import DiscoveryLink, iter_linked_skill_records
+
+    direct = make_skill(
+        tmp_path / "direct-root", "direct",
+        "---\nname: direct\ndescription: Use when direct\n---\n",
+    )
+    container = tmp_path / "container"
+    make_skill(
+        container, "nested",
+        "---\nname: nested\ndescription: Use when nested\n---\n",
+    )
+    links = [
+        DiscoveryLink("direct-link", "/link/direct", str(direct), True),
+        DiscoveryLink("container-link", "/link/container", str(container), True),
+    ]
+
+    records = iter_linked_skill_records(links)
+
+    assert [(r.source_lane, r.discovery_status, r.name) for r in records] == [
+        ("linked", "LINKED", "nested"),
+        ("linked", "LINKED", "direct"),
+    ]

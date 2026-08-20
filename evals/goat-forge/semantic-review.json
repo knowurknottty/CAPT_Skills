@@ -1,0 +1,443 @@
+{
+  "false_positive_examples": [
+    "unbroker",
+    "peoplesearch-aggregator",
+    "biocapt-full-stack",
+    "capt-solo-v04-engineering",
+    "meme-generation",
+    "one-three-one-rule",
+    "hermes-skills-catalog"
+  ],
+  "review_evidence": [
+    "structural ranking over 354 active packages",
+    "manual source-shape inspection",
+    "duplicate donor comparison",
+    "independent local Qwen3.8 27B semantic critique"
+  ],
+  "selected": [
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 52,
+        "relative_path": "goat-harvest/goat-skill-router-core-contract",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-skill-router-core-contract"
+      },
+      "name": "goat-skill-router-core-contract",
+      "reason": "Strong ownership/evidence contract but current core leaks Android/CAPT-specific policy into a generic router.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 60,
+        "relative_path": "goat-harvest/goat-agent-workflows-productivity",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-agent-workflows-productivity"
+      },
+      "name": "goat-agent-workflows-productivity",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 58,
+        "relative_path": "goat-harvest/goat-backend-data-payments",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-backend-data-payments"
+      },
+      "name": "goat-backend-data-payments",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 58,
+        "relative_path": "goat-harvest/goat-cloud-infra-iac",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-cloud-infra-iac"
+      },
+      "name": "goat-cloud-infra-iac",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 54,
+        "relative_path": "goat-harvest/goat-databases-sql-nosql-edge-data",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-databases-sql-nosql-edge-data"
+      },
+      "name": "goat-databases-sql-nosql-edge-data",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 58,
+        "relative_path": "goat-harvest/goat-llm-mcp-rag-agentic",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-llm-mcp-rag-agentic"
+      },
+      "name": "goat-llm-mcp-rag-agentic",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 54,
+        "relative_path": "goat-harvest/goat-testing-tdd-browser-automation",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-testing-tdd-browser-automation"
+      },
+      "name": "goat-testing-tdd-browser-automation",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 52,
+        "relative_path": "goat-harvest/goat-mobile-native-expo",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-mobile-native-expo"
+      },
+      "name": "goat-mobile-native-expo",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 50,
+        "relative_path": "goat-harvest/goat-marketing-seo-growth-content",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-marketing-seo-growth-content"
+      },
+      "name": "goat-marketing-seo-growth-content",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 48,
+        "relative_path": "goat-harvest/goat-frontend-design-nextjs",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/goat-harvest/goat-frontend-design-nextjs"
+      },
+      "name": "goat-frontend-design-nextjs",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 32,
+        "relative_path": "software-development/systematic-debugging",
+        "source_lane": "bundled",
+        "source_path": "~/.hermes/hermes-agent/skills/software-development/systematic-debugging"
+      },
+      "name": "systematic-debugging",
+      "reason": "Foundational root-cause method; live donor is corrupted, so use the clean bundled donor and compress.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 45,
+        "relative_path": "software-development/test-driven-development",
+        "source_lane": "bundled",
+        "source_path": "~/.hermes/hermes-agent/skills/software-development/test-driven-development"
+      },
+      "name": "test-driven-development",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 42,
+        "relative_path": "software-development/subagent-driven-development",
+        "source_lane": "optional",
+        "source_path": "~/.hermes/hermes-agent/optional-skills/software-development/subagent-driven-development"
+      },
+      "name": "subagent-driven-development",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "SPLIT",
+      "donor": {
+        "auto_score": 63,
+        "relative_path": "verify-before-claim",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/verify-before-claim"
+      },
+      "name": "verify-before-claim",
+      "reason": "Foundational evidence discipline but accumulated into a 14k-word omnibus; extract a small core and references.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "SPLIT",
+      "donor": {
+        "auto_score": 70,
+        "relative_path": "software-development/verification-workflows",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/verification-workflows"
+      },
+      "name": "verification-workflows",
+      "reason": "High-leverage verification router but 12k words and many unrelated modes; split core routing from mode references.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 61,
+        "relative_path": "software-development/codebase-archaeology",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/codebase-archaeology"
+      },
+      "name": "codebase-archaeology",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 60,
+        "relative_path": "software-development/repository-hygiene",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/repository-hygiene"
+      },
+      "name": "repository-hygiene",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 68,
+        "relative_path": "software-development/stacked-pr-decomposition",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/stacked-pr-decomposition"
+      },
+      "name": "stacked-pr-decomposition",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 55,
+        "relative_path": "frozen-baseline-integration",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/frozen-baseline-integration"
+      },
+      "name": "frozen-baseline-integration",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 64,
+        "relative_path": "software-development/external-driver-conformance",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/external-driver-conformance"
+      },
+      "name": "external-driver-conformance",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 56,
+        "relative_path": "software-development/cross-language-schema-bindings",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/cross-language-schema-bindings"
+      },
+      "name": "cross-language-schema-bindings",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 57,
+        "relative_path": "hermes/skill-curation",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/hermes/skill-curation"
+      },
+      "name": "skill-curation",
+      "reason": "Meta-skill directly governs library health, overlap, and mutation authority.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 55,
+        "relative_path": "software-development/cross-session-skill-harvest",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/cross-session-skill-harvest"
+      },
+      "name": "cross-session-skill-harvest",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 54,
+        "relative_path": "software-development/agent-self-modification-governance",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/agent-self-modification-governance"
+      },
+      "name": "agent-self-modification-governance",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 41,
+        "relative_path": "software-development/adversarial-integration-audit",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/adversarial-integration-audit"
+      },
+      "name": "adversarial-integration-audit",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 44,
+        "relative_path": "security/secure-command-execution",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/security/secure-command-execution"
+      },
+      "name": "secure-command-execution",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "SPLIT",
+      "donor": {
+        "auto_score": 63,
+        "relative_path": "continuous-research-cycle",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/continuous-research-cycle"
+      },
+      "name": "continuous-research-cycle",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 55,
+        "relative_path": "research/deep-research",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/research/deep-research"
+      },
+      "name": "deep-research",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 54,
+        "relative_path": "mlops/forensic-architecture-reconstruction",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/mlops/forensic-architecture-reconstruction"
+      },
+      "name": "forensic-architecture-reconstruction",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 54,
+        "relative_path": "software-development/registry-driven-ecosystem",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/registry-driven-ecosystem"
+      },
+      "name": "registry-driven-ecosystem",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 53,
+        "relative_path": "devops/deployment-resilience-verification",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/devops/deployment-resilience-verification"
+      },
+      "name": "deployment-resilience-verification",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 44,
+        "relative_path": "software-development/mcp-server-engineering",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/software-development/mcp-server-engineering"
+      },
+      "name": "mcp-server-engineering",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "REWRITE",
+      "donor": {
+        "auto_score": 50,
+        "relative_path": "security/security-toolkit",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/security/security-toolkit"
+      },
+      "name": "security-toolkit",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    },
+    {
+      "action": "HARDEN",
+      "donor": {
+        "auto_score": 54,
+        "relative_path": "apple/macos-computer-use",
+        "source_lane": "live",
+        "source_path": "~/.hermes/skills/apple/macos-computer-use"
+      },
+      "name": "macos-computer-use",
+      "reason": "Distinct reusable capability or domain router; deeper source review required before promotion.",
+      "status": "GOAT_CANDIDATE"
+    }
+  ],
+  "selected_count": 34,
+  "selection_policy": "High-leverage reusable capability density; structural score is triage only; semantic review and source inspection are authoritative for candidate selection.",
+  "upstream_keep_no_fork": [
+    "hyperframes",
+    "hyperframes-animation",
+    "hyperframes-audio",
+    "hyperframes-cli",
+    "hyperframes-core",
+    "hyperframes-creative",
+    "hyperframes-keyframes",
+    "hyperframes-registry",
+    "inversion-creative-critic",
+    "inversion-creative-director",
+    "inversion-interface-craft",
+    "inversion-motion-craft"
+  ]
+}

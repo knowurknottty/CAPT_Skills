@@ -9,6 +9,7 @@ if str(ROOT) not in sys.path:
 
 from goat_forge.inventory import (
     iter_discovery_links,
+    iter_linked_skill_records,
     iter_skill_records,
     write_discovery_links,
     write_inventory,
@@ -35,11 +36,13 @@ def main() -> int:
     records = iter_skill_records(
         {"live": args.live, "bundled": args.bundled, "optional": args.optional}
     )
+    links = iter_discovery_links(args.live)
+    records.extend(iter_linked_skill_records(links))
     jsonl = args.jsonl or args.repo_root / "provenance/inventory.jsonl"
     summary = args.summary or args.repo_root / "provenance/inventory-summary.json"
     write_inventory(records, jsonl, summary)
     links_path = args.links or args.repo_root / "provenance/discovery-links.jsonl"
-    write_discovery_links(iter_discovery_links(args.live), links_path)
+    write_discovery_links(links, links_path)
     print(f"inventoried {len(records)} skill packages")
     return 0
 

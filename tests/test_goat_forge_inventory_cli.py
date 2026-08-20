@@ -32,3 +32,30 @@ def test_inventory_cli_scans_explicit_roots(tmp_path: Path):
     assert [row["source_lane"] for row in rows] == ["bundled", "live", "optional"]
     assert report["total"] == 3
     assert links.exists()
+
+
+def test_inventory_cli_includes_linked_skill_targets(tmp_path: Path):
+    live = tmp_path / "live"
+    bundled = tmp_path / "bundled"
+    optional = tmp_path / "optional"
+    for root in (live, bundled, optional):
+        root.mkdir()
+    target = tmp_path / "external" / "linked-skill"
+    target.mkdir(parents=True)
+    (target / "SKILL.md").write_text(
+        "---\nname: linked-skill\ndescription: Use when linked\n---\n# linked\n"
+    )
+    (live / "linked-skill").symlink_to(target, target_is_directory=True)
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    jsonl = tmp_path / "inventory.jsonl"
+
+    completed = subprocess.run([
+        sys.executable, "scripts/goat_forge_inventory.py", "--repo-root", str(repo),
+        "--live", str(live), "--bundled", str(bundled), "--optional", str(optional),
+        "--jsonl", str(jsonl),
+    ], capture_output=True, text=True, check=False)
+
+    assert completed.returncode == 0, completed.stderr
+    rows = [json.loads(line) for line in jsonl.read_text().splitlines()]
+    assert [(r["source_lane"], r["name"]) for r in rows] == [("linked", "linked-skill")]

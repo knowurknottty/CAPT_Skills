@@ -190,3 +190,43 @@ def write_discovery_links(links: list[DiscoveryLink], output_path: Path) -> None
     output_path.parent.mkdir(parents=True, exist_ok=True)
     lines = [json.dumps(link.to_dict(), sort_keys=True) for link in links]
     output_path.write_text("\n".join(lines) + ("\n" if lines else ""))
+
+
+def iter_linked_skill_records(links: list[DiscoveryLink]) -> list[SkillRecord]:
+    records: list[SkillRecord] = []
+    seen: set[Path] = set()
+    for link in sorted(links, key=lambda item: item.name):
+        target = Path(link.target_path).expanduser()
+        if not target.exists():
+            continue
+        direct = target / "SKILL.md"
+        skill_files = [direct] if direct.is_file() else sorted(target.rglob("SKILL.md"))
+        for skill_md in skill_files:
+            skill_root = skill_md.parent.resolve(strict=False)
+            if skill_root in seen:
+                continue
+            seen.add(skill_root)
+            try:
+                text = skill_md.read_text(errors="replace")
+            except OSError:
+                text = ""
+            name, description, status = _frontmatter(text, skill_root.name)
+            files, bytes_, symlinks = _stats(skill_root)
+            suffix = skill_root.relative_to(target).as_posix() if skill_root != target else ""
+            relative = link.name + (f"/{suffix}" if suffix else "")
+            records.append(
+                SkillRecord(
+                    source_lane="linked",
+                    source_path=portable_path(skill_root),
+                    relative_path=relative,
+                    name=name,
+                    description=description,
+                    file_count=files,
+                    byte_count=bytes_,
+                    symlink_count=symlinks,
+                    tree_sha256=tree_digest(skill_root),
+                    frontmatter_status=status,
+                    discovery_status="LINKED",
+                )
+            )
+    return records
