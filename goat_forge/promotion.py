@@ -18,11 +18,17 @@ SecretScanner = Callable[[Path], tuple[bool, str]]
 class EvalEvidence:
     static_contract: bool
     pressure_cases: bool
-    semantic_review: bool
+    capt_qwen38_review: bool
+    capt_nemotron_lightning_review: bool
 
     @property
     def passed(self) -> bool:
-        return self.static_contract and self.pressure_cases and self.semantic_review
+        return (
+            self.static_contract
+            and self.pressure_cases
+            and self.capt_qwen38_review
+            and self.capt_nemotron_lightning_review
+        )
 
 
 @dataclass(frozen=True)

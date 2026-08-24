@@ -30,7 +30,7 @@ STOP if evidence is unavailable or authority is exceeded.
 
 
 def passed_evidence() -> EvalEvidence:
-    return EvalEvidence(static_contract=True, pressure_cases=True, semantic_review=True)
+    return EvalEvidence(static_contract=True, pressure_cases=True, capt_qwen38_review=True, capt_nemotron_lightning_review=True)
 
 
 def test_promotion_rejects_raw_quarantine_source(tmp_path: Path):
@@ -58,7 +58,7 @@ def test_promotion_blocks_failed_eval_or_secret_scan(tmp_path: Path):
         forged,
         repo,
         quarantine,
-        EvalEvidence(static_contract=True, pressure_cases=False, semantic_review=True),
+        EvalEvidence(static_contract=True, pressure_cases=False, capt_qwen38_review=True, capt_nemotron_lightning_review=True),
         secret_scanner=lambda _: (True, "clean"),
     )
     assert failed_eval.state == "FIX"
@@ -107,3 +107,24 @@ def test_promotion_copies_only_verified_forged_package(tmp_path: Path):
     assert (destination / "SKILL.md").exists()
     assert (destination / "references" / "method.md").read_text() == "safe reference"
     assert not (repo / "quarantine").exists()
+
+
+def test_promotion_requires_both_named_capt_reviewers(tmp_path: Path):
+    quarantine = tmp_path / "quarantine"
+    forged = write_valid_skill(quarantine)
+    repo = tmp_path / "repo"
+    repo.mkdir()
+
+    missing_qwen = promote_candidate(
+        forged, repo, quarantine,
+        EvalEvidence(static_contract=True, pressure_cases=True, capt_qwen38_review=False, capt_nemotron_lightning_review=True),
+        secret_scanner=lambda _: (True, "clean"),
+    )
+    assert missing_qwen.state == "FIX"
+
+    missing_nemotron = promote_candidate(
+        forged, repo, quarantine,
+        EvalEvidence(static_contract=True, pressure_cases=True, capt_qwen38_review=True, capt_nemotron_lightning_review=False),
+        secret_scanner=lambda _: (True, "clean"),
+    )
+    assert missing_nemotron.state == "FIX"
